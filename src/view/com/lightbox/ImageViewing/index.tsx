@@ -404,10 +404,16 @@ function LightboxImage({
     .maxPointers(1)
     .onUpdate(e => {
       'worklet'
+      if (openProgress.value !== 1) {
+        return
+      }
       dismissSwipeTranslateY.value = e.translationY
     })
     .onEnd(e => {
       'worklet'
+      if (openProgress.value !== 1) {
+        return
+      }
       if (Math.abs(e.velocityY) > 1000) {
         isFlyingAway.value = true
         dismissSwipeTranslateY.value = withDecay({
